@@ -6,28 +6,64 @@ namespace ClassTask3.Models
 {
     class Weapon
     {
-        public int bulletCapacity;
-        public int bulletCount;
-        public double bulletShootSecond;
-        public bool autoMode;
+        private int _bulletCapacity;
+        private int _bulletCount;
+        private double _bulletShootSecond;
+        private bool _autoMode;
 
+        public int BulletCapacity
+        {
+            get
+            {
+                if (_bulletCapacity > 0)
+                    return _bulletCapacity;
+                return -1;
+            }
+            set { _bulletCapacity = Math.Abs(value); }
+        }
+        public int BulletCount
+        {
+            get
+            {
+                if (_bulletCount > 0)
+                    return _bulletCount;
+                return -1;
+            }
+            set { _bulletCount = Math.Abs(value); }
+        }
+        public double BulletShootSecond
+        {
+            get
+            {
+                if (_bulletShootSecond > 0)
+                    return _bulletShootSecond;
+                return -1;
+            }
+            set { _bulletShootSecond = Math.Abs(value); }
+
+        }
+        public bool AutoMode
+        {
+            get { return _autoMode; }
+            set { _autoMode = value; }
+        }
 
         public Weapon(int bulletCapacity, int bulletCount, double bulletShootSecond, bool autoMode)
         {
-            this.bulletCapacity = bulletCapacity;
-            this.bulletCount = bulletCount;
-            this.bulletShootSecond = bulletShootSecond;
-            this.autoMode = autoMode;
+            BulletCapacity = bulletCapacity;
+            BulletCount = bulletCount;
+            BulletShootSecond = bulletShootSecond;
+            AutoMode = autoMode;
             if (bulletCapacity < bulletCount)
                 Console.WriteLine("Güllə sayısı güllə tutumundan çox ola bilməz");
         }
 
         public void Shoot()
         {
-            if (bulletCount != 0)
+            if (_bulletCount != 0)
             {
-                    Console.WriteLine("pew");
-                    Console.WriteLine($"Qalan güllə sayısı: {--bulletCount}");
+                Console.WriteLine("pew");
+                Console.WriteLine($"Qalan güllə sayısı: {--_bulletCount}");
             }
             else
                 Console.WriteLine("Daraq boşdur");
@@ -36,12 +72,12 @@ namespace ClassTask3.Models
         public void Fire()
         {
             double shootedbulletSecond = 0;
-            if (bulletCount != 0)
+            if (_bulletCount != 0)
             {
-                shootedbulletSecond = (bulletCount * bulletShootSecond) / bulletCapacity;
-                bulletCount = 0;
+                shootedbulletSecond = (_bulletCount * _bulletShootSecond) / _bulletCapacity;
+                _bulletCount = 0;
                 Console.WriteLine($"Güllə {Math.Round(shootedbulletSecond, 2)} saniyəyə bitdi");
-                if (autoMode == true)
+                if (_autoMode == true)
                     Console.WriteLine("pew pew");
                 else
                     Console.WriteLine("pew");
@@ -52,12 +88,12 @@ namespace ClassTask3.Models
 
         public void GetRemainBulletCount()
         {
-            if (bulletCapacity != 0 && bulletCapacity > bulletCount)
+            if (_bulletCapacity != 0 && _bulletCapacity > _bulletCount)
             {
-                if (bulletCapacity - bulletCount == 0)
+                if (_bulletCapacity - _bulletCount == 0)
                     Console.WriteLine("Daraq doludur.");
                 else
-                    Console.WriteLine($"Darağın dolması ücün lazım olan güllə sayı = {bulletCapacity - bulletCount}");
+                    Console.WriteLine($"Darağın dolması ücün lazım olan güllə sayı = {_bulletCapacity - _bulletCount}");
             }
             else
                 Console.WriteLine("Bu işdə bir tərslik var");
@@ -65,15 +101,15 @@ namespace ClassTask3.Models
 
         public void Reload()
         {
-            if (bulletCapacity != 0 && bulletCapacity > bulletCount)
+            if (_bulletCapacity != 0 && _bulletCapacity > _bulletCount)
             {
-                if (bulletCapacity - bulletCount == 0)
+                if (_bulletCapacity - _bulletCount == 0)
                     Console.WriteLine("Daraq doludur");
                 else
                 {
-                    int bullet = bulletCapacity - bulletCount;
-                    bulletCount = bulletCount + bullet;
-                    Console.WriteLine($"Daraq maksimum dolduruldu. Güllə sayı: {bulletCount}");
+                    int bullet = _bulletCapacity - _bulletCount;
+                    _bulletCount = _bulletCount + bullet;
+                    Console.WriteLine($"Daraq maksimum dolduruldu. Güllə sayı: {_bulletCount}");
                 }
             }
             else
@@ -81,15 +117,15 @@ namespace ClassTask3.Models
         }
         public void ChangeFireMode()
         {
-            if (autoMode == false)
+            if (_autoMode == false)
             {
                 Console.WriteLine("Avtomatik mod aktivdir");
-                autoMode = true;
+                _autoMode = true;
             }
             else
             {
                 Console.WriteLine("Avtomatik mod passivdir");
-                autoMode = false;
+                _autoMode = false;
             }
         }
     }

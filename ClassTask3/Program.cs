@@ -7,17 +7,16 @@ namespace ClassTask3
     {
         static void Main(string[] args)
         {
-            Console.OutputEncoding = System.Text.Encoding.GetEncoding("UTF-16");
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
 
 
-            Console.Write("Darağın maksimum tutumunu daxil edin: ");
-            int bulletCapacity = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Hazırda olan güllə sayını daxil edin: ");
-            int bulletCount = Convert.ToInt32(Console.ReadLine()); ;
-            Console.Write("Darağın boşalma saniyəsini daxil edin: ");
-            double bulletShootSecond = Convert.ToDouble(Console.ReadLine()); ;
-            Console.Write("Avtomatik modun aktiv və ya passiv olmasını daxil edin(True ya da False): ");
-            bool autoMode = Convert.ToBoolean(Console.ReadLine()); ;
+            int bulletCapacity = -1;
+            int bulletCount = -1;
+            int chooseMode = -1;
+            double bulletShootSecond = -1;
+            bool autoMode = true;
+
+            CheckInput(ref bulletCapacity, ref bulletCount, ref bulletShootSecond, ref chooseMode, ref autoMode);
             Weapon w = new Weapon(bulletCapacity, bulletCount, bulletShootSecond, autoMode);
 
             int key = 0;
@@ -29,10 +28,11 @@ namespace ClassTask3
 4-Reload
 5-ChangeFireMode
 6-Sagolun
+7-Redaktə et
 ");
             while (key != 6)
             {
-                
+                Console.WriteLine("Məlumat almaq üçün 0 daxil edə bilərsiniz");
                 key = Convert.ToInt32(Console.ReadLine());
                 switch (key)
                 {
@@ -45,6 +45,7 @@ namespace ClassTask3
 4-Reload
 5-ChangeFireMode
 6-Sagolun
+7-Redaktə et
 ");
                         break;
                     case 1:
@@ -68,7 +69,13 @@ namespace ClassTask3
                         w.ChangeFireMode();
                         break;
                     case 6:
-                        Console.WriteLine("Sagolun.");
+                        Console.WriteLine("Sagolun");
+                        break;
+                    case 7:
+                        Console.WriteLine($@"T-Güllə tutumunu dəyişmək üçündür
+S-Hazırki güllə sayını dəyişmək üçündür
+D-Darağın boşalma saniyəsini dəyişmək üçündür"); ;
+                        Edit(bulletCapacity, bulletCount, bulletShootSecond);
                         break;
                     default:
                         Console.WriteLine("0-6 araliginda reqem daxil edib metodlari cagira bilersiz");
@@ -77,28 +84,74 @@ namespace ClassTask3
             }
         }
 
-        static void CheckInput(ref int bulletCapacity, ref int bulletCount, ref double bulletShootSecond)
+        static void Edit(int bulletCapacity, int bulletCount, double bulletShootSecond)
+        {
+               string key = Console.ReadLine();
+                switch (key.ToUpper())
+                {
+                    case "T":
+                        Console.Write("Darağın maksimum tutumunu daxil edin: ");
+                        bulletCapacity = Convert.ToInt16(Console.ReadLine());
+                        if (bulletCapacity <= 0)
+                            Console.WriteLine("Yanlış məlumat daxil edildi");
+                        break;
+                    case "S":
+                        Console.Write("Hazırda olan güllə sayını daxil edin: ");
+                        bulletCount = Convert.ToInt16(Console.ReadLine());
+                        if (bulletCount < 0 || bulletCount > bulletCapacity)
+                            Console.WriteLine("Yanlış məlumat daxil edildi");
+                        break;
+                    case "D":
+                        Console.Write("Darağın boşalma saniyəsini daxil edin: ");
+                        bulletShootSecond = Convert.ToDouble(Console.ReadLine());
+                        if (bulletShootSecond <= 0)
+                            Console.WriteLine("Yanlış məlumat daxil edildi");
+                        break;
+                    default:
+                        Console.WriteLine("Yanlış məlumat daxil edildi");
+                        break;
+                }
+        }
+
+        static void CheckInput(ref int bulletCapacity, ref int bulletCount, ref double bulletShootSecond, ref int chooseMode, ref bool autoMode)
         {
             while (bulletCapacity <= 0)
             {
-                Console.Write("Güllə tutumu: ");
+                Console.Write("Darağın maksimum tutumunu daxil edin: ");
                 bulletCapacity = Convert.ToInt16(Console.ReadLine());
-                if (bulletCapacity <= 0) Console.WriteLine("Səhf data");
+                if (bulletCapacity <= 0)
+                    Console.WriteLine("Yanlış məlumat daxil edildi");
             }
             while (bulletCount < 0 || bulletCount > bulletCapacity)
             {
-                Console.Write("Gulle sayi:");
+                Console.Write("Hazırda olan güllə sayını daxil edin: ");
                 bulletCount = Convert.ToInt16(Console.ReadLine());
-                if (bulletCount < 0 || bulletCount > bulletCapacity) Console.WriteLine("Səhf data");
+                if (bulletCount < 0 || bulletCount > bulletCapacity)
+                    Console.WriteLine("Yanlış məlumat daxil edildi");
             }
             while (bulletShootSecond <= 0)
             {
-                Console.Write("Bosalma saniyesi:");
+                Console.Write("Darağın boşalma saniyəsini daxil edin: ");
                 bulletShootSecond = Convert.ToDouble(Console.ReadLine());
-                if (bulletShootSecond <= 0) Console.WriteLine("Səhf data");
+                if (bulletShootSecond <= 0)
+                    Console.WriteLine("Yanlış məlumat daxil edildi");
             }
-           
+            while (true)
+            {
+                Console.Write("Avtomatik modun aktiv və ya passiv olmasını daxil edin(1 ya da 0): ");
+                chooseMode = Convert.ToInt32(Console.ReadLine());
+                if (chooseMode == 1)
+                {
+                    autoMode = true;
+                    break;
+                }
+                else if (chooseMode == 0)
+                {
+                    autoMode = false;
+                }
+                else
+                    Console.WriteLine("Yanlış məlumat daxil edildi");
+            }
         }
-
     }
 }
