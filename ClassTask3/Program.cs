@@ -23,7 +23,13 @@ namespace ClassTask3
             int key = 0;
             while (key != 6)
             {
-                Console.WriteLine(@$"0-Info:
+
+                key = Convert.ToInt32(Console.ReadLine());
+                switch (key)
+                {
+                    case 0:
+                        Console.WriteLine("Ümümi Məlumat");
+                        Console.WriteLine(@$"0-Info:
 1-Shoot
 2-Fire
 3-GetRemainBulletCount
@@ -31,12 +37,6 @@ namespace ClassTask3
 5-ChangeFireMode
 6-Sagolun
 ");
-                key = Convert.ToInt32(Console.ReadLine());
-                switch (key)
-                {
-                    case 0:
-                        Console.WriteLine("Ümümi Məlumat");
-                        w.Info();
                         break;
                     case 1:
                         Console.WriteLine("Shoot metodu cagirildi");

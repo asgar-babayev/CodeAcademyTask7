@@ -94,15 +94,6 @@ namespace ClassTask3.Models
                 autoMode = false;
             }
         }
-        public void Info()
-        {
-            Console.WriteLine(@$"Maksimum tutum: {bulletCapacity}
-Hazırki güllə sayısı: {bulletCount}
-Güllənin boşalma saniyəsi :{bulletShootSecond}
-Güllənin atış modu: {autoMode}
-");
-        }
-
     }
 
 }
