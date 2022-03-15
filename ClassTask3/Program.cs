@@ -76,5 +76,29 @@ namespace ClassTask3
                 }
             }
         }
+
+        static void CheckInput(ref int bulletCapacity, ref int bulletCount, ref double bulletShootSecond)
+        {
+            while (bulletCapacity <= 0)
+            {
+                Console.Write("Güllə tutumu: ");
+                bulletCapacity = Convert.ToInt16(Console.ReadLine());
+                if (bulletCapacity <= 0) Console.WriteLine("Səhf data");
+            }
+            while (bulletCount < 0 || bulletCount > bulletCapacity)
+            {
+                Console.Write("Gulle sayi:");
+                bulletCount = Convert.ToInt16(Console.ReadLine());
+                if (bulletCount < 0 || bulletCount > bulletCapacity) Console.WriteLine("Səhf data");
+            }
+            while (bulletShootSecond <= 0)
+            {
+                Console.Write("Bosalma saniyesi:");
+                bulletShootSecond = Convert.ToDouble(Console.ReadLine());
+                if (bulletShootSecond <= 0) Console.WriteLine("Səhf data");
+            }
+           
+        }
+
     }
 }
