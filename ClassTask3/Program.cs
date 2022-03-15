@@ -21,9 +21,18 @@ namespace ClassTask3
             Weapon w = new Weapon(bulletCapacity, bulletCount, bulletShootSecond, autoMode);
 
             int key = 0;
+            Console.WriteLine("Ümümi Məlumat");
+            Console.WriteLine(@$"0-Info:
+1-Shoot
+2-Fire
+3-GetRemainBulletCount
+4-Reload
+5-ChangeFireMode
+6-Sagolun
+");
             while (key != 6)
             {
-
+                
                 key = Convert.ToInt32(Console.ReadLine());
                 switch (key)
                 {

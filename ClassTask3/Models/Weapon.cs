@@ -19,9 +19,7 @@ namespace ClassTask3.Models
             this.bulletShootSecond = bulletShootSecond;
             this.autoMode = autoMode;
             if (bulletCapacity < bulletCount)
-            {
                 Console.WriteLine("Güllə sayısı güllə tutumundan çox ola bilməz");
-            }
         }
 
         public void Shoot()
