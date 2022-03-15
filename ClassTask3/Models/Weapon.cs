@@ -26,12 +26,15 @@ namespace ClassTask3.Models
 
         public void Shoot()
         {
-            if (autoMode == true)
-                Console.WriteLine("Auto modda tək güllə atıla bilməz");
-            else if (bulletCount != 0)
+            if (bulletCount != 0)
             {
-                Console.WriteLine("pew");
-                Console.WriteLine($"Qalan güllə sayısı: {--bulletCount}");
+                if (autoMode == true)
+                    Console.WriteLine("Auto modda tək güllə atıla bilməz");
+                else if (bulletCount != 0)
+                {
+                    Console.WriteLine("pew");
+                    Console.WriteLine($"Qalan güllə sayısı: {--bulletCount}");
+                }
             }
             else
                 Console.WriteLine("Daraq boşdur");
@@ -56,7 +59,7 @@ namespace ClassTask3.Models
 
         public void GetRemainBulletCount()
         {
-            if (bulletCount != 0 && bulletCapacity != 0 && bulletCapacity < bulletCount)
+            if (bulletCapacity != 0 && bulletCapacity > bulletCount)
             {
                 if (bulletCapacity - bulletCount == 0)
                     Console.WriteLine("Daraq doludur.");
@@ -73,9 +76,11 @@ namespace ClassTask3.Models
             {
                 if (bulletCapacity - bulletCount == 0)
                     Console.WriteLine("Daraq doludur");
-                else if(bulletCount == 0)
+                else
                 {
-                    Console.WriteLine($"Daraq maksimum dolduruldu. Güllə sayı: {bulletCapacity - bulletCount}");
+                    int bullet = bulletCapacity - bulletCount;
+                    bulletCount = bulletCount + bullet;
+                    Console.WriteLine($"Daraq maksimum dolduruldu. Güllə sayı: {bulletCount}");
                     bulletCount = bulletCapacity;
                 }
             }
