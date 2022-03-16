@@ -74,10 +74,10 @@ D-Darağın boşalma saniyəsini dəyişmək üçündür"); ;
                                     Console.Write("Darağın maksimum tutumunu daxil edin: ");
                                     w.BulletCapacity = Convert.ToInt16(Console.ReadLine());
 
-                                    if (w.BulletCapacity <= 0 || w.BulletCapacity > 3000 || w.BulletCapacity < w.BulletCount)
+                                    if (w.BulletCapacity <= 0 || w.BulletCapacity < w.BulletCount)
                                         Console.WriteLine("Yanlış məlumat daxil edildi");
                                 }
-                                while (w.BulletCapacity <= 0 || w.BulletCapacity > 3000 || w.BulletCapacity < w.BulletCount);
+                                while (w.BulletCapacity <= 0 || w.BulletCapacity < w.BulletCount);
                                 break;
                             case "S":
                                 do
