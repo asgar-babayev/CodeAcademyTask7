@@ -20,19 +20,9 @@ namespace ClassTask3
             Weapon w = new Weapon(bulletCapacity, bulletCount, bulletShootSecond, autoMode);
 
             int key = 0;
-            Console.WriteLine("Ümümi Məlumat");
-            Console.WriteLine(@$"0-Info:
-1-Shoot
-2-Fire
-3-GetRemainBulletCount
-4-Reload
-5-ChangeFireMode
-6-Sagolun
-7-Redaktə et
-");
             while (key != 6)
             {
-                Console.WriteLine("Məlumat almaq üçün 0 daxil edə bilərsiniz");
+                Console.WriteLine("Ümümi məlumat almaq üçün 0 daxil edə bilərsiniz");
                 key = Convert.ToInt32(Console.ReadLine());
                 switch (key)
                 {
@@ -75,7 +65,43 @@ namespace ClassTask3
                         Console.WriteLine($@"T-Güllə tutumunu dəyişmək üçündür
 S-Hazırki güllə sayını dəyişmək üçündür
 D-Darağın boşalma saniyəsini dəyişmək üçündür"); ;
-                        Edit(bulletCapacity, bulletCount, bulletShootSecond);
+                        string letter = Console.ReadLine();
+                        switch (letter.ToUpper())
+                        {
+                            case "T":
+                                do
+                                {
+                                    Console.Write("Darağın maksimum tutumunu daxil edin: ");
+                                    w.BulletCapacity = Convert.ToInt16(Console.ReadLine());
+
+                                    if (w.BulletCapacity <= 0 || w.BulletCapacity > 3000 || w.BulletCapacity < w.BulletCount)
+                                        Console.WriteLine("Yanlış məlumat daxil edildi");
+                                }
+                                while (w.BulletCapacity <= 0 || w.BulletCapacity > 3000 || w.BulletCapacity < w.BulletCount);
+                                break;
+                            case "S":
+                                do
+                                {
+                                     Console.Write("Hazırda olan güllə sayını daxil edin: ");
+                                     w.BulletCount = Convert.ToInt16(Console.ReadLine());
+                                     if (w.BulletCount < 0 || w.BulletCount > w.BulletCapacity)
+                                        Console.WriteLine("Yanlış məlumat daxil edildi");
+                                }
+                                while (w.BulletCount < 0 || w.BulletCount >w.BulletCapacity);
+                                break;
+                            case "D":
+                                do
+                                {
+                                    Console.Write("Darağın boşalma saniyəsini daxil edin: ");
+                                    w.BulletShootSecond = Convert.ToDouble(Console.ReadLine());
+                                    if (w.BulletShootSecond <= 0)
+                                        Console.WriteLine("Yanlış məlumat daxil edildi");
+                                } while (w.BulletShootSecond <= 0);
+                                break;
+                            default:
+                                Console.WriteLine("Yanlış məlumat daxil edildi");
+                                break;
+                        }
                         break;
                     default:
                         Console.WriteLine("0-6 araliginda reqem daxil edib metodlari cagira bilersiz");
@@ -83,36 +109,6 @@ D-Darağın boşalma saniyəsini dəyişmək üçündür"); ;
                 }
             }
         }
-
-        static void Edit(int bulletCapacity, int bulletCount, double bulletShootSecond)
-        {
-               string key = Console.ReadLine();
-                switch (key.ToUpper())
-                {
-                    case "T":
-                        Console.Write("Darağın maksimum tutumunu daxil edin: ");
-                        bulletCapacity = Convert.ToInt16(Console.ReadLine());
-                        if (bulletCapacity <= 0)
-                            Console.WriteLine("Yanlış məlumat daxil edildi");
-                        break;
-                    case "S":
-                        Console.Write("Hazırda olan güllə sayını daxil edin: ");
-                        bulletCount = Convert.ToInt16(Console.ReadLine());
-                        if (bulletCount < 0 || bulletCount > bulletCapacity)
-                            Console.WriteLine("Yanlış məlumat daxil edildi");
-                        break;
-                    case "D":
-                        Console.Write("Darağın boşalma saniyəsini daxil edin: ");
-                        bulletShootSecond = Convert.ToDouble(Console.ReadLine());
-                        if (bulletShootSecond <= 0)
-                            Console.WriteLine("Yanlış məlumat daxil edildi");
-                        break;
-                    default:
-                        Console.WriteLine("Yanlış məlumat daxil edildi");
-                        break;
-                }
-        }
-
         static void CheckInput(ref int bulletCapacity, ref int bulletCount, ref double bulletShootSecond, ref int chooseMode, ref bool autoMode)
         {
             while (bulletCapacity <= 0)

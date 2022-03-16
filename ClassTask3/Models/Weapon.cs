@@ -19,7 +19,7 @@ namespace ClassTask3.Models
                     return _bulletCapacity;
                 return -1;
             }
-            set { _bulletCapacity = Math.Abs(value); }
+            set { _bulletCapacity = value; }
         }
         public int BulletCount
         {
@@ -29,7 +29,7 @@ namespace ClassTask3.Models
                     return _bulletCount;
                 return -1;
             }
-            set { _bulletCount = Math.Abs(value); }
+            set { _bulletCount = value; }
         }
         public double BulletShootSecond
         {
@@ -39,7 +39,7 @@ namespace ClassTask3.Models
                     return _bulletShootSecond;
                 return -1;
             }
-            set { _bulletShootSecond = Math.Abs(value); }
+            set { _bulletShootSecond = value; }
 
         }
         public bool AutoMode
